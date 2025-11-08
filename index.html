@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mkopo Quick Accessible Loans</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* --- STYLES FOR LANDING PAGE --- */
+:root {
+    --primary-color: #0056b3; /* Deep Blue, more professional */
+    --secondary-color: #17a2b8; /* Cyan/Teal, strong contrast */
+    --accent-color: #28a745; /* Green for success/money */
+    --text-dark: #212529;
+    --text-light: #f8f9fa;
+    --bg-light: #ffffff;
+    --bg-dark: #e9ecef; /* Light grey/off-white */
+    --shadow-md: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+/* General reset and font */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif;}
+body{background:var(--bg-light);color:var(--text-dark);line-height:1.6;overflow-x:hidden;}
+/* General containers */
+.container{max-width:1200px;margin:0 auto;padding:0 20px;}
+h2{font-size:2.8em;font-weight:700;margin-bottom:10px;color:var(--primary-color);}
+p.subtitle{font-size:1.15em;color:#6c757d;margin-bottom:50px;font-weight:300;}
+/* Header/Nav */
+header{background-color:var(--bg-light);box-shadow:var(--shadow-md);position:sticky;top:0;z-index:1000;}
+nav{display:flex;justify-content:space-between;align-items:center;padding:15px 0;}
+.logo{font-size:1.7em;font-weight:800;color:var(--primary-color);text-decoration:none;white-space:nowrap;}
+.logo i{color:var(--accent-color);margin-right:5px;}
+.nav-links a{color:var(--text-dark);text-decoration:none;margin-left:20px;font-weight:500;transition:color 0.3s;}
+.nav-links a:hover{color:var(--primary-color);}
+/* Hero Section */
+.hero{background-color:var(--bg-dark);padding:100px 0;display:flex;align-items:center;min-height:75vh;}
+.hero > .container{display:flex;align-items:center;justify-content:center;width:100%;position:relative;z-index:1;}
+.hero-content{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:700px;}
+.hero-content h1{font-size:3.8em;font-weight:800;line-height:1.15;margin-bottom:15px;color:var(--primary-color);}
+.hero-content h1 span{color:var(--accent-color);}
+.hero-content p{font-size:1.25em;margin-bottom:30px;font-weight:400;color:#495057;}
+.tagline{display:inline-block;background-color:var(--primary-color);color:var(--text-light);padding:5px 12px;border-radius:4px;font-weight:600;font-size:0.9em;margin-bottom:25px;text-transform:uppercase;letter-spacing:0.5px;box-shadow:0 2px 5px rgba(0, 0, 0, 0.1);}
+.tagline i{margin-right:5px;color:#ffc107;}
+.hero-cta-group{display:flex;flex-direction:column;gap:15px;width:100%;max-width:380px;margin:0 auto;}
+.secondary-btn-group{display:flex;gap:15px;}
+.secondary-btn{flex:1;padding:14px;font-size:1.1em;font-weight:600;}
+/* General Animated Button Style */
+.animated-btn{border:none;border-radius:8px;color:var(--text-light);cursor:pointer;transition:all 0.3s ease;position:relative;overflow:hidden;z-index:1;text-align:center;text-decoration:none;display:inline-block;box-shadow:0 4px 10px rgba(0, 0, 0, 0.15);}
+.animated-btn:hover{transform:translateY(-2px);box-shadow:0 6px 15px rgba(0, 0, 0, 0.2);}
+.animated-btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:rgba(255, 255, 255, 0.3);transition:all 0.4s;z-index:-1;transform:skewX(-20deg);}
+.animated-btn:hover::after{left:100%;}
+.animated-btn.processing {pointer-events: none; background-color: #ffc107 !important; color: var(--text-dark) !important;}
+@keyframes loading-dots {0% { content: 'Processing'; } 25% { content: 'Processing.'; } 55% { content: 'Processing..'; } 80% { content: 'Processing...'; }}
+.animated-btn.processing .text-content::before {content: 'Processing'; animation: loading-dots 0.75s infinite steps(1);}
+/* Sections */
+.features{padding:80px 0 40px;text-align:center;background-color:var(--bg-light);position:relative;}
+.features-grid{display:flex;justify-content:space-around;flex-wrap:wrap;margin-top:30px;}
+.feature-item{flex-basis:22%;padding:25px;margin:10px 0;background-color:var(--bg-dark);border-radius:10px;transition:transform 0.3s, box-shadow 0.3s;border-left:5px solid var(--secondary-color);}
+.feature-item:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);}
+.feature-item i{font-size:2.2em;color:var(--secondary-color);margin-bottom:15px;}
+.feature-item h3{font-size:1.2em;font-weight:700;}
+.stats{background-color:var(--primary-color);color:var(--text-light);padding:50px 0;text-align:center;margin-bottom:80px;}
+.stats-grid{display:flex;justify-content:space-around;flex-wrap:wrap;}
+.stat-item .number{font-size:3.2em;font-weight:800;display:block;}
+.stat-item .label{font-size:1.1em;font-weight:300;opacity:0.9;}
+.how-it-works{padding:40px 0 80px;text-align:center;background-color:var(--bg-light);}
+.steps-grid{display:flex;justify-content:space-between;margin-top:40px;gap:20px;}
+.step-item{flex-basis:23%;padding:30px;text-align:center;border:1px solid var(--bg-dark);border-radius:10px;position:relative;transition:all 0.3s;}
+.steps-grid .step-item:not(:last-child)::after{content:'>>';position:absolute;top:50%;right:-15px;transform:translateY(-50%);font-size:1.5em;color:var(--secondary-color);font-weight:300;}
+.calculator-section{background-color:var(--bg-dark);padding:80px 0;}
+.calculator-content{display:flex;gap:50px;align-items:flex-start;}
+.calculator-form{flex:1;background:var(--bg-light);padding:30px;border-radius:10px;box-shadow:var(--shadow-md);}
+.calculator-form label{display:block;margin-bottom:5px;font-weight:600;color:var(--text-dark);}
+.calculator-form input[type="range"]{width:100%;margin:10px 0 20px;}
+.range-display{display:flex;justify-content:space-between;margin-bottom:20px;}
+.summary-card{flex:1;background-color:var(--primary-color);color:var(--text-light);padding:30px;border-radius:10px;}
+.summary-card h3{border-bottom:2px solid rgba(255, 255, 255, 0.3);padding-bottom:10px;margin-bottom:20px;}
+.summary-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed rgba(255, 255, 255, 0.3);}
+.summary-item:last-child{border-bottom:none;font-size:1.1em;font-weight:600;margin-top:10px;}
+.highlight-rate{background-color:var(--accent-color);padding:5px 10px;border-radius:5px;font-weight:700;}
+.testimonials{padding:80px 0;text-align:center;}
+.testimonials-grid{display:flex;gap:25px;margin-top:40px;}
+.testimonial-card{flex:1;padding:30px;background:var(--bg-dark);border-radius:10px;text-align:left;position:relative;box-shadow:var(--shadow-md);border-top:4px solid var(--accent-color);}
+.testimonial-card i.fa-quote-left{font-size:2em;color:var(--primary-color);opacity:0.2;position:absolute;top:15px;left:15px;}
+.testimonial-card p{font-style:italic;margin-bottom:15px;font-size:1.05em;position:relative;z-index:1;}
+.customer-info{font-weight:600;color:var(--primary-color);}
+.customer-info small{display:block;font-weight:400;color:#666;margin-top:5px;}
+footer{background-color:var(--text-dark);color:var(--text-light);padding:30px 0;text-align:center;font-size:0.9em;}
+footer a{color:var(--primary-color);text-decoration:none;}
+/* Responsive (briefly for space) */
+@media (max-width: 992px) {.hero > .container {flex-direction: column;} .hero-content h1 {font-size: 3em;} .calculator-content {flex-direction: column;} }
+@media (max-width: 600px) {.hero-content h1 {font-size: 2.2em;} .secondary-btn-group {flex-direction: column;} }
+
+/* --- STYLES FROM ORIGINAL APPLICATION CODE (For all sub-pages) --- */
+/* The original application styles are merged here, simplified for brevity */
+nav#app-nav{width:100%;padding:20px;background:#107a34;color:white;font-size:24px;font-weight:700;text-align:center;box-shadow:0 3px 10px rgba(0, 0, 0, 0.3);}
+#app-container{max-width:600px;margin:40px auto;background:white;padding:30px;border-radius:16px;text-align:center;box-shadow:0 8px 25px rgba(0, 0, 0, 0.15);opacity:0; animation:fadeInSlide 0.5s forwards;}
+@keyframes fadeInSlide{from{opacity:0; transform:translateY(20px);}to{opacity:1; transform:translateY(0);}}
+.app-h2{font-size:26px;color:#107a34;margin-bottom:15px;font-weight:600;}
+.app-p{font-size:16px;color:#555;margin-bottom:20px;line-height:1.6;}
+input, select, textarea{width:100%;padding:15px;font-size:16px;border:1px solid #ddd;border-radius:8px;margin-bottom:20px;resize:none;transition:border-color 0.3s, box-shadow 0.3s;}
+.app-btn{display:inline-block;padding:12px 25px;margin:5px;font-size:16px;font-weight:600;color:white;background:#107a34;border:none;border-radius:8px;text-decoration:none;cursor:pointer;transition:0.3s ease;box-shadow:0 4px 10px rgba(0, 0, 0, 0.1);}
+.app-btn:hover{background:#0d632c;transform:translateY(-2px);box-shadow:0 6px 12px rgba(0, 0, 0, 0.2);}
+.app-btn.secondary{background:#f0f0f0;color:#555;box-shadow:none;border:1px solid #ccc;}
+.app-btn.secondary:hover{background:#e0e0e0;transform:translateY(-1px);}
+.message-box{background:#e9f7ee;border-left:4px solid #107a34;padding:18px;text-align:left;border-radius:8px;font-size:16px;color:#333;line-height:1.6;margin-bottom:25px;}
+.terms-box{max-height:300px;overflow-y:auto;text-align:left;padding:15px;border:1px solid #ccc;border-radius:8px;margin-bottom:20px;background:#fafafa;}
+.button-row{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin-top:10px;}
+.loan-card{background:linear-gradient(135deg, #107a34 0%, #0d632c 100%);color:white;padding:30px;border-radius:12px;margin-bottom:30px;box-shadow:0 10px 20px rgba(0, 0, 0, 0.2);}
+.radio-group label{display:block;padding:12px;margin-bottom:8px;border:1px solid #ddd;border-radius:8px;cursor:pointer;text-align:left;transition:background-color 0.3s, border-color 0.3s;}
+/* Modal */
+#processingModal {display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.6);justify-content: center;align-items: center;z-index: 2000;}
+#processingModal .modal-content {background: white;padding: 30px 40px;border-radius: 12px;text-align: center;font-size: 18px;font-weight: 600;color: #107a34;box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);}
+.spinner {border: 4px solid #f3f3f3;border-top: 4px solid #107a34;border-radius: 50%;width: 30px;height: 30px;animation: spin 1s linear infinite; margin: 0 auto 10px;}
+@keyframes spin {0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); }}
+
+/* Hide all sections initially */
+.app-section{display:none;}
+/* Show landing page first */
+#landing-page { display: block; }
+
+</style>
+</head>
+<body>
+
+<section id="landing-page">
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo"><i class="fas fa-coins"></i>Quick-Mkopo</a>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">Process</a>
+                    <a href="#calculator">Calculator</a>
+                    <a href="#testimonials">Reviews</a>
+                    <a href="#" class="animated-btn" style="background: var(--primary-color); padding: 8px 18px; margin-left: 20px; font-size: 1em;" onclick="handleRegistrationFlow(event)">Apply Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container"> 
+            <div class="hero-content">
+                <span class="tagline"><i class="fas fa-check-circle"></i> **No CRB Check Required**</span>
+                <h1>Borrow Upto <br><span>Ksh 200,000</span> Instantly</h1>
+                <p>Fast, Secure & Transparent Loan Services. Your financial relief in 24 Hours.</p>
+                <div class="hero-cta-group">
+                    <div class="secondary-btn-group">
+                        <button class="animated-btn secondary-btn" style="background-color: var(--secondary-color);" onclick="handleRegistrationFlow(event)">
+                            <span class="text-content">Register <i class="fas fa-user-plus"></i></span>
+                        </button>
+                        <button class="animated-btn secondary-btn" style="background-color: var(--primary-color);" onclick="handleRegistrationFlow(event)">
+                            <span class="text-content">Login <i class="fas fa-sign-in-alt"></i></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Our Core Values</h2>
+            <p class="subtitle">Quick-Mkopo-Loans provides fast, secure, and reliable loan services with competitive interest rates and flexible repayment terms.</p>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-clock"></i>
+                    <h3>Fast Approval in 24 Hours</h3>
+                    <p>Quick processing ensures you get funds when you need them most.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-percent"></i>
+                    <h3>Competitive Rates from 6%</h3>
+                    <p>Enjoy some of the lowest, most transparent interest rates in the market.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-lock"></i>
+                    <h3>Secure & Transparent Process</h3>
+                    <p>Your data is protected, and all terms are clearly outlined upfront.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-handshake-alt"></i>
+                    <h3>Flexible Repayment</h3>
+                    <p>Tailored repayment terms to suit your financial situation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="number">500K+</span>
+                    <span class="label">Active Users</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">98%</span>
+                    <span class="label">Satisfaction Rate</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">24/7</span>
+                    <span class="label">Support Available</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">2M+</span>
+                    <span class="label">Loans Disbursed</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <p class="subtitle">Simple steps to get your loan from your phone.</p>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <div class="icon-number">1</div>
+                    <h4>Register</h4>
+                    <p>Create your account in minutes with basic information.</p>
+                </div>
+                <div class="step-item">
+                    <div class="icon-number">2</div>
+                    <h4>Apply</h4>
+                    <p>Fill out the loan application with your details and requirements.</p>
+                </div>
+                <div class="step-item">
+                    <div class="icon-number">3</div>
+                    <h4>Get Approved</h4>
+                    <p>Our team reviews your application and approves within hours.</p>
+                </div>
+                <div class="step-item">
+                    <div class="icon-number">4</div>
+                    <h4>Receive Money</h4>
+                    <p>Get your loan disbursed directly to your M-Pesa or bank account.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--text-dark);">Loan Calculator</h2>
+            <p class="subtitle" style="text-align: center;">Calculate your monthly payments and total interest before applying.</p>
+            <div class="calculator-content">
+                <div class="calculator-form">
+                    <label for="loanAmount">Loan Amount (KES)</label>
+                    <input type="range" id="loanAmount" min="5000" max="200000" step="1000" value="50000" oninput="calculateLoan()">
+                    <div class="range-display">
+                        <span>KES 5,000</span>
+                        <span id="loanAmountValue">KES 50,000</span>
+                        <span>KES 200,000</span>
+                    </div>
+                    <label for="repaymentPeriod">Repayment Period (Months)</label>
+                    <input type="range" id="repaymentPeriod" min="1" max="24" step="1" value="12" oninput="calculateLoan()">
+                    <div class="range-display">
+                        <span>1 Month</span>
+                        <span id="repaymentPeriodValue">12 Months</span>
+                        <span>24 Months</span>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <h3>Your Loan Summary</h3>
+                    <div class="summary-item">
+                        <span>Monthly Payment</span>
+                        <span id="monthlyPayment">KES 4,303.32</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Total Interest</span>
+                        <span id="totalInterest">KES 1,639.86</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Total Amount Payable</span>
+                        <span id="totalAmount">KES 51,639.86</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Interest Rate (Per Annum)</span>
+                        <span class="highlight-rate" id="interestRate">6%</span>
+                    </div>
+                    <button class="animated-btn" style="width: 100%; background: var(--text-light); color: var(--primary-color); margin-top: 20px;" onclick="handleRegistrationFlow(event)">
+                        Apply with these Terms <i class="fas fa-hand-holding-usd"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>What Our Customers Say</h2>
+            <p class="subtitle">Real feedback from satisfied borrowers across Kenya.</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left"></i>
+                    <p>“Quick-Mkopo-Loans approved my loan in just a few hours and the money was in my M-Pesa the same day. The process was so easy and transparent!”</p>
+                    <div class="customer-info">
+                        Mary Wanjiku
+                        <small>Nakuru County</small>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left"></i>
+                    <p>“I was able to get a loan without any CRB check. The interest rates are fair and the repayment terms are flexible. Highly recommend!”</p>
+                    <div class="customer-info">
+                        John Otieno
+                        <small>Kisumu County</small>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left"></i>
+                    <p>“The customer support team was very helpful and guided me through every step. I got my loan quickly and without hassle.”</p>
+                    <div class="customer-info">
+                        Amina Abdalla
+                        <small>Eldoret County</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025-2030 Quick-Mkopo-Loans. All rights reserved.</p>
+            <p style="margin-top: 5px;"><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+</section>
+<nav id="app-nav" style="display:none;">Mkopo Quick Accessible Loans</nav>
+
+<section id="page-1" class="app-section">
+  <div id="app-container" class="container">
+    <h2 class="app-h2">Create or Access Your Account</h2>
+    <p class="app-p">Enter your details to register a new account or sign in if you are already registered.</p>
+
+    <div id="loginSection" style="margin-bottom: 30px;">
+      <h3 class="app-h2" style="font-size: 1.5em; color: var(--primary-color); margin-bottom: 20px;">Existing User Sign In</h3>
+      <input type="tel" id="loginPhone" placeholder="M-PESA Phone (e.g., 0712345678)" maxlength="10" class="contact-inputs" required>
+      
+      <div class="input-group">
+        <input type="password" id="loginPassword" placeholder="Password" class="contact-inputs" required>
+        <span class="toggle-password" onclick="togglePasswordVisibility('loginPassword')">👁️</span>
+      </div>
+      
+      <a href="#" class="forgot-password-link" onclick="forgotPassword(event)">Forgot Password?</a>
+
+      <div class="button-row">
+        <a href="#" class="app-btn" onclick="loginUser()">Sign In</a>
+      </div>
+    </div>
+
+    <div id="registerSection" style="border-top: 1px dashed #ccc; padding-top: 30px;">
+        <h3 class="app-h2" style="font-size: 1.5em; color: var(--secondary-color); margin-bottom: 20px;">New User Registration</h3>
+        <form id="registerForm" onsubmit="submitRegistration(event)">
+            <input type="hidden" name="access_key" value="750707f5-b4fd-42f8-b5a7-bcab3c6546ea">
+            <input type="text" name="name" id="regName" placeholder="Full Name" class="contact-inputs" required>
+            <input type="email" name="email" id="regEmail" placeholder="Email Address" class="contact-inputs" required>
+            
+            <div class="input-group">
+                <input type="password" name="password" id="regPassword" placeholder="Create Password" class="contact-inputs" required>
+                <span class="toggle-password" onclick="togglePasswordVisibility('regPassword')">👁️</span>
+            </div>
+            
+            <div class="phone-input-group">
+            <input type="tel" name="phone" id="regPhone" placeholder="M-PESA Phone (07XXXXXXXX)" maxlength="10" required style="margin-bottom:0;">
+            <a href="#" class="app-btn secondary" onclick="generateCode(event)" id="getCodeBtn">Get Verification Code</a>
+            </div>
+            
+            <div id="codeDisplay" style="display:none; margin-bottom: 20px; border: 1px dashed #107a34; padding: 10px; border-radius: 8px; background: #e9f7ee; text-align: center;">
+                <p style="color:#107a34; font-weight:bold; margin-bottom: 10px; font-size: 18px;">Verification Code: <span id="mockCodeValue" style="font-size: 20px;"></span></p>
+                <a href="#" class="app-btn secondary" onclick="copyCode(event)" style="padding: 8px 15px; font-size: 15px; margin: 0;">Copy Code</a>
+            </div>
+
+            <input type="text" id="regCode" placeholder="Enter Verification Code" class="contact-inputs" required disabled>
+
+            <div class="button-row">
+            <button type="submit" class="app-btn" id="registerBtn" disabled>Register Account</button>
+            <a href="#" class="app-btn secondary" onclick="goBack()">← Back to Landing Page</a>
+            </div>
+        </form>
+    </div>
+  </div>
+</section>
+<section id="page101" class="app-section">
+    <div id="app-container" class="container">
+        <h2 class="app-h2" style="display: flex; align-items: center; justify-content: center; gap: 10px;">🛎 Enable Notifications</h2>
+        <p class="app-p">Stay informed about your application status, approval, and repayment dates.</p>
+
+        <div class="message-box">
+            <p style="font-weight: 600;">**Benefits of Enabling Notifications:**</p>
+            <ul>
+                <li>**Instant Updates:** Receive immediate alerts when your loan decision is ready.</li>
+                <li>**Timely Reminders:** Get repayment reminders to help you avoid late fees.</li>
+                <li>**Security:** Be instantly alerted to any changes or actions on your account.</li>
+            </ul>
+        </div>
+
+        <div class="button-row">
+            <a href="#" class="app-btn secondary" onclick="simulateProcessingAndNavigate(function(){showPage(0)})">Skip for Now →</a>
+            <a href="#" class="app-btn" onclick="requestNotificationPermission()">Allow Notifications →</a>
+        </div>
+    </div>
+</section>
+
+<section id="page0" class="app-section">
+  <div id="app-container" class="container">
+    <h2 class="app-h2">Mandatory Terms & Conditions</h2>
+    <p class="app-p">Please review and accept our terms to access your personalized dashboard.</p>
+    <div class="terms-box">
+      <p><b>1. Eligibility:</b> Loan applicants must be residents of Kenya and above 18 years old.</p>
+      <p><b>2. Commitment Fee:</b> A non-refundable **Commitment Fee** is required to process the loan request, varying based on the loan amount requested.</p>
+      <p><b>3. Loan Details:</b> The approved loan amount, interest rate, and repayment schedule will be officially communicated upon successful approval.</p>
+      <p><b>4. Penalties:</b> Late payments will incur penalties as outlined in our official company policy.</p>
+      <p><b>5. Privacy:</b> All personal information provided will be handled with strict confidentiality in accordance with our data protection policy.</p>
+      <p><b>6. Right to Reject:</b> The company reserves the right to accept or reject any application without providing a reason.</p>
+      <p><b>7. M-PESA:</b> M-PESA transactions are managed by Safaricom; ensure your provided number is correct for communication.</p>
+      <p><b>8. Agreement:</b> By accepting these terms, you agree to comply with all repayment and usage conditions of the loan.</p>
+    </div>
+    
+    <div class="checkbox-group">
+      <input type="checkbox" id="acceptTerms" onchange="checkTermsAccepted()">
+      <label for="acceptTerms">I have read, understood, and accept the **Terms & Conditions**.</label>
+    </div>
+
+    <div class="button-row">
+      <a href="#" class="app-btn secondary" onclick="goBack()">← Go Back</a>
+      <a href="#" class="app-btn" id="proceedBtn" onclick="simulateProcessingAndNavigate(acceptTermsAndProceed)" disabled>Proceed to Dashboard →</a>
+    </div>
+  </div>
+</section>
+
+<section id="page4" class="app-section">
+<div id="app-container" class="container">
+    <h2 class="app-h2">Welcome Back, <span id="dashboardUserName" style="color:#107a34;">User!</span> 👋</h2>
+    <p class="app-p">Your finance hub. Review your eligibility and start a new application.</p>
+    
+    <div id="reapplyNoticeBox" style="display:none;">
+        <p style="font-weight: 700; color: #e65100;">📢 Action Required: Application Submitted!</p>
+        <p>Please check your application status. If approval is delayed, you may need to reapply after 6 hours.</p>
+    </div>
+
+    <div class="loan-card">
+        <div class="card-title">Maximum Current Eligibility</div>
+        <div class="card-amount">KES 100,000</div>
+        <div class="card-info">Based on your M-PESA history and credit score.</div>
+    </div>
+    
+    <div class="button-row">
+        <a href="#" class="app-btn" onclick="simulateProcessingAndNavigate(function(){showPage(0.5)})">🚀 Apply for a Loan Now</a>
+        <a href="#" class="app-btn secondary" id="checkStatusBtn" onclick="simulateProcessingAndNavigate(function(){showPage(4.2)})" disabled>Check Status</a>
+    </div>
+
+    <div class="button-row">
+        <a href="#" class="app-btn secondary" onclick="showPage(5)">Review Terms</a>
+        <a href="#" class="app-btn secondary" onclick="logoutUser()">Log Out</a>
+    </div>
+</div>
+</section>
+
+<section id="page0.5" class="app-section">
+    <div id="app-container" class="container">
+        <h2 class="app-h2">Occupation Details</h2>
+        <p class="app-p">Please select your current employment status to help determine your repayment capacity.</p>
+        
+        <div class="radio-group" id="occupationDetails">
+            <label>
+                <input type="radio" name="occupationStatus" value="Civil Servant/Employed" required>
+                **Civil Servant/Employed:** Currently holding formal employment (public or private sector).
+            </label>
+            <label>
+                <input type="radio" name="occupationStatus" value="Self Employed/Business Owner">
+                **Self-Employed/Business Owner:** Generating income through a business or personal services.
+            </label>
+            <label>
+                <input type="radio" name="occupationStatus" value="Not Currently Employed">
+                **Not Currently Employed:** Unemployed, student, or retired.
+            </label>
+        </div>
+
+        <div class="button-row">
+            <a href="#" class="app-btn secondary" onclick="goBack()">← Back to Dashboard</a>
+            <a href="#" class="app-btn" onclick="simulateProcessingAndNavigate(checkOccupationAndProceed)">Proceed to Income Details →</a>
+        </div>
+    </div>
+</section>
+
+<section id="page1.2" class="app-section">
+    <div id="app-container" class="container">
+        <h2 class="app-h2">Income Details</h2>
+        <p class="app-p">How much is your income per month, week, or year? This helps us determine your capacity.</p>
+        
+        <div class="radio-group" id="incomeDetails">
+            <label>
+                <input type="radio" name="incomeType" value="Weekly" required>
+                **Weekly** Income (e.g., KES 5,000)
+            </label>
+            <label>
+                <input type="radio" name="incomeType" value="Monthly">
+                **Monthly** Income (e.g., KES 20,000)
+            </label>
+            <label>
+                <input type="radio" name="incomeType" value="Annually">
+                **Annually** Income (e.g., KES 240,000)
+            </label>
+        </div>
+
+        <input type="number" id="incomeAmount" placeholder="Enter Your Income Amount (KES)" required>
+        
+        <div class="button-row">
+            <a href="#" class="app-btn secondary" onclick="goBack()">← Back</a>
+            <a href="#" class="app-btn" onclick="simulateProcessingAndNavigate(checkIncomeDetailsAndProceed)">Proceed to Educational Background →</a>
+        </div>
+    </div>
+</section>
+
+<section id="page1.0" class="app-section">
+    <div id="app-container" class="container">
+        <h2 class="app-h2">Educational Background</h2>
+        <p class="app-p">This information helps us tailor your loan profile and eligibility.</p>
+        
+        <div class="radio-group" id="educationDetails">
+            <label>
+                <input type="radio" name="educationLevel" value="Secondary School" required>
+                **Secondary School** or Below
+            </label>
+            <label>
+                <input type="radio" name="educationLevel" value="University Student">
+                Currently a **University Student**
+            </label>
+            <label>
+                <input type="radio" name="educationLevel" value="Graduate/Post-Graduate">
+                **Graduate/Post-Graduate** Degree
+            </label>
+        </div>
+
+        <div class="button-row">
+            <a href="#" class="app-btn secondary" onclick="goBack()">← Back</a>
+            <a href="#" class="app-btn" onclick="simulateProcessingAndNavigate(checkEducationAndProceed)">Proceed to Borrowing Limits →</a>
+        </div>
+    </div>
+</section>
+
+<section id="page1.1" class="app-section">
+    <div id="app-container" class="container">
+        <h3 class="app-h2">Borrowing Limits Selection</h3>
+        <p class="app-p">Select the type of loan you require and the amount you wish to borrow.</p>
+
+        <label style="display:block; text-align:left; margin-bottom: 5px; font-weight: 600; color:#555;">National ID Number:</label>
+        <input type="number" id="idNumber" placeholder="Enter your 8-digit National ID" minlength="7" maxlength="8" required>
+
+        <label style="display:block; text-align:left; margin-bottom: 5px; font-weight: 600; color:#555;">Select Loan Type:</label>
+        <select id="loanType">
+            <option value="Emergency Loan" data-max="200000">Emergency Loan – Max KES 200,000</option>
+            <option value="Business Loan" data-max="100000">Business Loan – Max KES 100,000</option>
+            <option value="Personal Loan" data-max="50000">Personal Loan – Max KES 50,000</option>
+        </select>
+
+        <label style="display:block; text-align:left; margin-bottom: 5px; font-weight: 600; color:#555;">Enter Amount (KES):</label>
+        <input type="number" id="loanAmount" placeholder="Enter desired amount" min="1">
+        
+        <div class="button-row">
+            <a href="#" class="app-btn secondary" onclick="goBack()">← Back</a>
+            <a href="#" class="app-btn" onclick="confirmLoanAndProceed()">Proceed to Commitment Fee →</a>
+        </div>
+    </div>
+</section>
+
+
+<section id="page3" class="app-section">
+<div id="app-container" class="container">
+    <h2 class="app-h2" id="feeTitle">Finalize Application: Commitment Fee</h2>
+    <div class="message-box" style="text-align:center;">
+        <p>To finalize the processing of your loan request, a non-refundable **Commitment Fee of <span id="dynamicFeeAmount" style="font-weight: 700;"></span>** is required. The fee is calculated based on your requested loan amount.</p>
+        <p style="font-weight:600; margin-top:15px; color:#0d632c;">Please remit the fee via M-PESA Send Money to the following Organizational number:</p>
+    </div>
+
+    <div class="message-box" style="text-align:center; background:#ffeb3b4d;">
+        <p style="font-size:18px; margin-bottom: 5px;">Recipient Name: **Judith**</p>
+        <p style="font-weight:700; font-size:24px; color:#107a34; margin-bottom: 15px;">0105565417</p>
+
+        <a href="#" class="app-btn secondary" onclick="copyTargetNumber(event)" style="padding: 10px 20px; font-size: 16px; margin: 0;">📋 Copy Organization Number</a>
+    </div>
+    <br>
+    <div class="button-row">
+        <a href="#" class="app-btn secondary" onclick="goBack()">← Back (Change Amount)</a>
+        <a href="#" class="app-btn" onclick="simulateProcessingAndNavigate(function(){showPage(3.5)})">I Have Paid, Continue →</a>
+    </div>
+</div>
+</section>
+
+<section id="page3.5" class="app-section">
+  <div id="app-container" class="container">
+    <h2 class="app-h2">M-PESA Payment Verification</h2>
+    <div class="message-box">
+        <p>To verify your Commitment Fee payment of **KES <span id="finalFeeVerification"></span>**, please paste the M-PESA confirmation SMS below.</p>
+        <p style="font-size:14px; color:#c62828;">This step is mandatory to proceed with your application review.</p>
+    </div>
+
+    <label style="display:block; text-align:left; margin-bottom: 5px; font-weight: 600; color:#555;">Paste M-PESA Confirmation SMS:</label>
+    <textarea id="mpesaFeeConfirmationMessage" placeholder="Paste your M-PESA message here (e.g., M000000000 confirmed...)" rows="5" required></textarea>
+
+    <div class="button-row">
+    <a href="#" class="app-btn secondary" onclick="goBack()">← Back (Fee Page)</a>
+    <a href="#" class="app-btn" onclick="simulateProcessingAndNavigate(checkMpesaConfirmationAndProceed)">Proceed to Summary →</a>
+    </div>
+  </div>
+</section>
+
+<section id="page8" class="app-section">
+<div id="app-container" class="container">
+<h2 class="app-h2">Application Summary</h2>
+<p class="app-p">Review and confirm the details below. All information must be accurate.</p>
+<div class="message-box" id="loanSummary"></div>
+<div class="button-row">
+<a href="#" class="app-btn secondary" onclick="goBack()">← Edit Details</a>
+<a href="#" class="app-btn" onclick="simulateProcessingAndNavigate(function(){showPage(9)})">Confirm & Select Repayment</a>
+</div>
+</div>
+</section>
+
+<section id="page9" class="app-section">
+<div id="app-container" class="container">
+<h2 class="app-h2">Repayment Schedule</h2>
+<p class="app-p">Choose the term that best fits your financial plan.</p>
+<select id="repaymentOption">
+<option value="30 days">30 Days (Short Term)</option>
+<option value="60 days">60 Days (Medium Term)</option>
+<option value="90 days">90 Days (Long Term)</option>
+</select>
+<div class="button-row">
+<a href="#" class="app-btn secondary" onclick="goBack()">← Back</a>
+<a href="#" class="app-btn" onclick="simulateProcessingAndNavigate(finalApplicationSubmission)">Submit Application</a>
+</div>
+</div>
+</section>
+
+
+<section id="page10" class="app-section">
+<div id="app-container" class="container">
+<h2 class="app-h2">Application Submitted for Review! ✅</h2>
+<div class="message-box" style="text-align:center; background:#d4edda; border-left-color: #155724; color: #155724;">
+    <p style="font-size: 18px; font-weight: 700;">Thank you for applying for a loan with Mkopo Quick Accessible Loans.</p>
+    <p>Your application is now under immediate review by our dedicated underwriting team.</p>
+    <p style="margin-top: 15px;">You will be contacted via SMS and Email with the official loan decision within **24 hours**.</p>
+</div>
+<div class="button-row">
+<a href="#" class="app-btn" onclick="applicationCompleteAndReturnToDashboard()">Go to Dashboard</a>
+</div>
+</div>
+</section>
+
+<section id="page4.2" class="app-section">
+<div id="app-container" class="container">
+<h2 class="app-h2">Loan Status Review</h2>
+<p class="app-p">Your application status check is currently being processed.</p>
+<div class="status-check-box">
+    <div class="status-indicator" style="font-weight:bold; margin-bottom: 10px;">Status: Awaiting System Response ⏳</div>
+    <p>If the application status persists, kindly **Wait for 6 hours** and then **Reapply again** if the problem continues.</p>
+    <p style="font-size: 14px; margin-top: 15px; color: #555;">(In a live system, this status would update dynamically.)</p>
+</div>
+<div class="button-row" style="margin-top: 30px;">
+<a href="#" class="app-btn secondary" onclick="showPage(4)">← Back to Dashboard</a>
+</div>
+</div>
+</section>
+
+<section id="page5" class="app-section">
+<div id="app-container" class="container">
+<h2 class="app-h2">Review Terms and Conditions</h2>
+<p class="app-p">For your reference, here are the full terms you accepted.</p>
+<div class="terms-box">
+<p><b>1. Eligibility:</b> Loan applicants must be residents of Kenya and above 18 years old.</p>
+<p><b>2. Commitment Fee:</b> A non-refundable Commitment Fee is required to process the loan request, varying based on the loan amount requested.</p>
+<p><b>3. Loan Details:</b> The approved loan amount, interest rate, and repayment schedule will be officially communicated upon successful approval.</p>
+<p><b>4. Penalties:</b> Late payments will incur penalties as outlined in our official company policy.</p>
+<p><b>5. Privacy:</b> All personal information provided will be handled with strict confidentiality in accordance with our data protection policy.</p>
+<p><b>6. Right to Reject:</b> The company reserves the right to accept or reject any application without providing a reason.</p>
+<p><b>7. M-PESA:</b> M-PESA transactions are managed by Safaricom; ensure your provided number is correct for communication.</p>
+<p><b>8. Agreement:</b> By accepting these terms, you agree to comply with all repayment and usage conditions of the loan.</p>
+</div>
+<div class="button-row">
+<a href="#" class="app-btn secondary" onclick="goBack()">← Back</a>
+</div>
+</div>
+</section>
+
+<div id="processingModal">
+    <div class="modal-content">
+        <div class="spinner"></div>
+        Processing details, please wait...
+    </div>
+</div>
+<script>
+// --- GLOBAL VARIABLES (from original script) ---
+const originalAlert = window.alert;
+window.alert = function(message) {
+    originalAlert(message);
+};
+
+let pageHistory = [];
+window.selectedLoan = {};
+window.incomeDetails = {}; 
+let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+let loggedInUser = null;
+let verificationCode = ''; 
+window.organizationPhoneNumber = '0105565417'; 
+window.commitmentFee = 0; 
+window.applicationSubmitted = false; 
+
+// --- UPDATED NAVIGATION HANDLERS ---
+function handleRegistrationFlow(event) {
+    event.preventDefault();
+    animateButtonProcessing(event.currentTarget); // Start animation
+    setTimeout(() => {
+        // Navigate to the registration/login page (-1)
+        showPage(-1, true); 
+        document.getElementById('landing-page').style.display = 'none';
+        document.getElementById('app-nav').style.display = 'block';
+    }, 3000); 
+}
+
+// --- SHARED BUTTON ANIMATION LOGIC (UPDATED) ---
+function animateButtonProcessing(button) {
+    const textContent = button.querySelector('.text-content');
+    const originalText = textContent ? textContent.innerHTML : button.innerText;
+    
+    // 1. Start the processing animation/state
+    button.classList.add('processing');
+    if (textContent) {
+        textContent.innerHTML = ''; 
+    } else {
+        button.innerText = '';
+    }
+
+    setTimeout(() => {
+        // 3. Stop the processing animation/state
+        button.classList.remove('processing');
+        if (textContent) {
+            textContent.innerHTML = originalText;
+        } else {
+            button.innerText = originalText;
+        }
+    }, 3000); 
+}
+
+// --- LOAN CALCULATOR LOGIC (from Landing Page) ---
+function calculateLoan() {
+    const loanAmountEl = document.getElementById('loanAmount');
+    const periodEl = document.getElementById('repaymentPeriod');
+    const principal = parseFloat(loanAmountEl.value);
+    const periodMonths = parseInt(periodEl.value);
+    const annualRate = 0.06; 
+
+    const monthlyRate = annualRate / 12;
+
+    let monthlyPayment;
+    if (monthlyRate === 0 || periodMonths === 0) {
+        monthlyPayment = principal / (periodMonths || 1); 
+    } else {
+        monthlyPayment = principal * monthlyRate * Math.pow(1 + monthlyRate, periodMonths) / (Math.pow(1 + monthlyRate, periodMonths) - 1);
+    }
+
+    const totalAmount = monthlyPayment * periodMonths;
+    const totalInterest = totalAmount - principal;
+
+    const formatKES = (value) => `KES ${value.toFixed(2).toLocaleString('en-US')}`;
+
+    document.getElementById('loanAmountValue').textContent = `KES ${principal.toLocaleString('en-US')}`;
+    document.getElementById('repaymentPeriodValue').textContent = `${periodMonths} Months`;
+    document.getElementById('monthlyPayment').textContent = formatKES(monthlyPayment);
+    document.getElementById('totalInterest').textContent = formatKES(totalInterest);
+    document.getElementById('totalAmount').textContent = formatKES(totalAmount);
+}
+
+
+// --- ORIGINAL APPLICATION JS LOGIC (All functions from the previous script) ---
+
+function saveUsers(){
+  localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+}
+
+function updateCheckStatusButton(){
+    const btn = document.getElementById('checkStatusBtn');
+    const reapplyBox = document.getElementById('reapplyNoticeBox');
+    
+    if (btn) {
+        btn.disabled = !window.applicationSubmitted;
+        if (window.applicationSubmitted) {
+            btn.classList.remove('secondary');
+            btn.classList.add('app-btn');
+        } else {
+            btn.classList.add('secondary');
+            btn.classList.remove('app-btn');
+        }
+    }
+    
+    if (reapplyBox) {
+        reapplyBox.style.display = window.applicationSubmitted ? 'block' : 'none';
+    }
+}
+
+function applicationCompleteAndReturnToDashboard() {
+    window.applicationSubmitted = true;
+    updateCheckStatusButton();
+    window.focus(); 
+    showPage(4);
+}
+
+function calculateCommitmentFee() {
+    const amount = window.selectedLoan.amount;
+
+    if (!amount || amount < 1) {
+        window.commitmentFee = 0;
+    } else if (amount <= 50000) {
+        window.commitmentFee = 99;
+    } else if (amount <= 100000) {
+        window.commitmentFee = 500;
+    } else if (amount <= 200000) {
+        window.commitmentFee = 5950;
+    } else {
+        window.commitmentFee = 0; 
+    }
+    
+    const feeDisplay = 'KES ' + window.commitmentFee.toLocaleString();
+    if (document.getElementById("dynamicFeeAmount")) {
+        document.getElementById("dynamicFeeAmount").innerText = feeDisplay;
+    }
+    if (document.getElementById("feeTitle")) {
+        document.getElementById("feeTitle").innerText = `Finalize Application: Commitment Fee (${feeDisplay})`;
+    }
+    if (document.getElementById("finalFeeVerification")) {
+        document.getElementById("finalFeeVerification").innerText = window.commitmentFee.toLocaleString();
+    }
+    
+    return window.commitmentFee;
+}
+
+function showPage(pageNumber, skipHistory=false){
+  document.querySelectorAll("#app-container").forEach(c => c.style.opacity = 0);
+  
+  setTimeout(() => {
+    document.querySelectorAll(".app-section").forEach(sec=>sec.style.display="none");
+    
+    const pageId = (pageNumber === -1) ? '#page-1' : 
+                   (pageNumber === 4.2) ? '#page4\\.2' : 
+                   (pageNumber === 3.5) ? '#page3\\.5' :
+                   (pageNumber === 1.1) ? '#page1\\.1' :
+                   (pageNumber === 1.2) ? '#page1\\.2' :
+                   (pageNumber === 1.0) ? '#page1\\.0' :
+                   (pageNumber === 0.5) ? '#page0\\.5' :
+                   (pageNumber === 101) ? '#page101' : 
+                   '#page' + pageNumber;
+                   
+    const targetPage = document.querySelector(pageId);
+    if (targetPage) {
+      targetPage.style.display = "block";
+      document.getElementById('landing-page').style.display = 'none';
+      document.getElementById('app-nav').style.display = 'block';
+
+      const appContainer = targetPage.querySelector('#app-container');
+      if (appContainer) {
+        setTimeout(() => {
+            appContainer.style.opacity = 1;
+            appContainer.style.transform = 'translateY(0)';
+        }, 50);
+      }
+
+    } else {
+      console.error('Page not found:', pageNumber);
+      return;
+    }
+
+    if(pageNumber==3 || pageNumber==3.5) { calculateCommitmentFee(); }
+    
+    const titles = {
+      "-1":"Create or Access Your Account", 101:"Allow Notifications 🛎", 0:"Mandatory Terms & Conditions", "0.5":"Occupation Details", "1.0":"Educational Background", "1.1":"Borrowing Limits Selection", "1.2":"Income Details", 3:`Commitment Fee Payment (KES ${window.commitmentFee.toLocaleString()})`, "3.5":"M-PESA Payment Verification", 4:"My Dashboard", 5:"Review Terms and Conditions", 8:"Application Summary", 9:"Repayment Schedule", 10:"Application Submitted for Review!", "4.2":"Loan Status Review"
+    };
+    document.getElementById("app-nav").innerText = titles[pageNumber] || "Mkopo Quick Accessible Loans";
+
+    if(pageNumber==4 && loggedInUser) {
+        document.getElementById('dashboardUserName').innerText = loggedInUser.name.split(' ')[0] || 'User';
+        updateCheckStatusButton(); 
+    }
+    
+    if(pageNumber==8) showLoanSummary();
+    
+    if(!skipHistory){ pageHistory.push(pageNumber); }
+  }, 300); 
+}
+
+function goBack(){
+  if(pageHistory.length>1){
+    pageHistory.pop();
+    let last=pageHistory[pageHistory.length-1];
+    showPage(last,true);
+  } else {
+     // If history is empty OR on the dedicated Registration/Login page (page -1), go back to the landing page
+     document.querySelectorAll(".app-section").forEach(sec=>sec.style.display="none");
+     document.getElementById('landing-page').style.display = 'block';
+     document.getElementById('app-nav').style.display = 'none';
+  }
+}
+
+// NOTE: toggleAuth function is no longer needed as the page is unified
+
+function generateCode(event){
+  event.preventDefault(); 
+  const phone=document.getElementById('regPhone').value.trim();
+  if(phone.length!==10){alert('Please enter a valid 10-digit M-PESA phone number (07XXXXXXXX).'); return;}
+  const userExists=registeredUsers.find(u=>u.phone===phone);
+  // Note: We no longer prevent registration if user exists. We let them register again 
+  // or provide a new phone number to keep the flow moving.
+
+  verificationCode = Math.floor(1000 + Math.random() * 9000).toString(); 
+  
+  document.getElementById('mockCodeValue').innerText = verificationCode;
+  document.getElementById('codeDisplay').style.display = 'block'; 
+
+  document.getElementById('regCode').value = '';
+  document.getElementById('regCode').disabled = false;
+  document.getElementById('registerBtn').disabled = true;
+  document.getElementById('getCodeBtn').innerText = 'Resend Code (60s)';
+  document.getElementById('getCodeBtn').onclick = (e) => { e.preventDefault(); alert('Please wait for 60 seconds before requesting a new code.'); };
+  
+  let countdown = 60;
+  const timer = setInterval(() => {
+    countdown--;
+    document.getElementById('getCodeBtn').innerText = `Resend Code (${countdown}s)`;
+    if (countdown <= 0) {
+      clearInterval(timer);
+      document.getElementById('getCodeBtn').innerText = 'Get Verification Code';
+      document.getElementById('getCodeBtn').onclick = generateCode;
+    }
+  }, 1000);
+
+  document.getElementById('regCode').oninput = function() {
+    if (this.value.length === 4) {
+      verifyCode();
+    } else {
+      document.getElementById('registerBtn').disabled = true;
+    }
+  };
+}
+
+function copyCode(event) {
+  event.preventDefault();
+  const code = document.getElementById('mockCodeValue').innerText;
+  alert(`✅ Verification Code copied: ${code}`);
+}
+
+function verifyCode(){
+  const enteredCode = document.getElementById('regCode').value.trim();
+  if(enteredCode === verificationCode && verificationCode.length > 0){
+    document.getElementById('registerBtn').disabled = false;
+  } else {
+    document.getElementById('registerBtn').disabled = true;
+  }
+}
+
+function submitRegistration(event){
+  event.preventDefault();
+  if(document.getElementById('registerBtn').disabled){alert("Please verify your code first."); return;}
+  
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const password = document.getElementById('regPassword').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+
+  // Simple validation
+  if(!name || !email || password.length < 6 || phone.length !== 10){
+    alert('Please fill in all fields correctly.');
+    return;
+  }
+  
+  // Check if user already exists
+  let userIndex = registeredUsers.findIndex(u => u.phone === phone);
+  
+  if (userIndex > -1) {
+    // If user exists, log them in (simulate successful registration, then login)
+    loggedInUser = registeredUsers[userIndex];
+    alert(`Welcome back, ${loggedInUser.name.split(' ')[0]}. You are already registered.`);
+  } else {
+    // New user registration
+    const newUser = {name, email, password, phone, applicationSubmitted: false};
+    registeredUsers.push(newUser);
+    saveUsers();
+    loggedInUser = newUser;
+    alert(`✅ Registration successful! Welcome, ${name.split(' ')[0]}.`);
+  }
+
+  simulateProcessingAndNavigate(function(){
+      showPage(101); // Proceed to next step for all
+  });
+}
+
+function loginUser(){
+  const phone = document.getElementById('loginPhone').value.trim();
+  const password = document.getElementById('loginPassword').value.trim();
+
+  const user = registeredUsers.find(u => u.phone === phone && u.password === password);
+
+  if(user){
+    loggedInUser = user;
+    window.applicationSubmitted = user.applicationSubmitted || false;
+    simulateProcessingAndNavigate(function(){
+        // Logged in successfully, proceed to notifications page
+        showPage(101); 
+    });
+  } else {
+    alert('❌ Sign In failed. Invalid phone number or password.');
+  }
+}
+
+function logoutUser(){
+  loggedInUser = null;
+  pageHistory = [];
+  window.applicationSubmitted = false;
+  simulateProcessingAndNavigate(function(){
+      alert('You have been logged out.');
+      // Go back to the landing page
+      document.querySelectorAll(".app-section").forEach(sec=>sec.style.display="none");
+      document.getElementById('landing-page').style.display = 'block';
+      document.getElementById('app-nav').style.display = 'none';
+  });
+}
+
+function forgotPassword(event){
+  event.preventDefault();
+  alert("Password reset is not implemented in this demo. Please contact support.");
+}
+
+function togglePasswordVisibility(id){
+  const input = document.getElementById(id);
+  if (input.type === "password") {
+    input.type = "text";
+    event.target.innerText = '🙈';
+  } else {
+    input.type = "password";
+    event.target.innerText = '👁️';
+  }
+}
+
+function requestNotificationPermission() {
+    alert("🔔 Notification permission requested! (Simulated)");
+    simulateProcessingAndNavigate(function(){showPage(0)});
+}
+
+function checkTermsAccepted(){
+  document.getElementById('proceedBtn').disabled = !document.getElementById('acceptTerms').checked;
+}
+
+function acceptTermsAndProceed(){
+  if(document.getElementById('acceptTerms').checked){
+    showPage(4);
+  } else {
+    alert("You must accept the terms and conditions to proceed.");
+  }
+}
+
+function checkOccupationAndProceed() {
+    const selected = document.querySelector('input[name="occupationStatus"]:checked');
+    if (selected) {
+        window.incomeDetails.occupation = selected.value;
+        showPage(1.2);
+    } else {
+        alert("Please select your occupation status to proceed.");
+    }
+}
+
+function checkIncomeDetailsAndProceed() {
+    const incomeType = document.querySelector('input[name="incomeType"]:checked');
+    const incomeAmount = document.getElementById('incomeAmount').value;
+    
+    if (incomeType && incomeAmount > 0) {
+        window.incomeDetails.type = incomeType.value;
+        window.incomeDetails.amount = parseFloat(incomeAmount);
+        showPage(1.0);
+    } else {
+        alert("Please select an income type and enter a valid income amount.");
+    }
+}
+
+function checkEducationAndProceed() {
+    const selected = document.querySelector('input[name="educationLevel"]:checked');
+    if (selected) {
+        window.incomeDetails.education = selected.value;
+        showPage(1.1);
+    } else {
+        alert("Please select your educational background to proceed.");
+    }
+}
+
+function confirmLoanAndProceed(){
+    const idNumber = document.getElementById('idNumber').value.trim();
+    const loanTypeSelect = document.getElementById('loanType');
+    const loanType = loanTypeSelect.value;
+    const maxAmount = parseFloat(loanTypeSelect.options[loanTypeSelect.selectedIndex].getAttribute('data-max'));
+    const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+
+    if (idNumber.length < 7 || idNumber.length > 8) {
+        alert("Please enter a valid 7 or 8-digit National ID number.");
+        return;
+    }
+    
+    if (loanAmount < 1 || loanAmount > maxAmount) {
+        alert(`The requested amount (KES ${loanAmount.toLocaleString()}) is outside the limit for a ${loanType}. Maximum is KES ${maxAmount.toLocaleString()}.`);
+        return;
+    }
+    
+    window.selectedLoan = {
+        id: idNumber,
+        type: loanType,
+        amount: loanAmount,
+        max: maxAmount
+    };
+
+    // Recalculate and proceed to commitment fee page
+    calculateCommitmentFee(); 
+    if(window.commitmentFee === 0) {
+        alert("There was an error calculating the commitment fee. Please check your requested amount.");
+        return;
+    }
+    simulateProcessingAndNavigate(function(){showPage(3)});
+}
+
+function copyTargetNumber(event) {
+    event.preventDefault();
+    const number = window.organizationPhoneNumber;
+    alert(`✅ Organization Number copied: ${number}`);
+}
+
+function checkMpesaConfirmationAndProceed() {
+    const mpesaMessage = document.getElementById('mpesaFeeConfirmationMessage').value.trim();
+
+    if (!mpesaMessage) {
+        alert("Please paste your M-PESA confirmation message.");
+        return;
+    }
+
+    const feeString = window.commitmentFee.toLocaleString();
+    const isFeeIncluded = mpesaMessage.includes(window.commitmentFee.toString()) || mpesaMessage.includes(feeString);
+    const isRecipientIncluded = mpesaMessage.toLowerCase().includes('judith') || mpesaMessage.includes(window.organizationPhoneNumber);
+
+    if (isFeeIncluded && isRecipientIncluded) {
+        alert(`✅ Payment of KES ${window.commitmentFee.toLocaleString()} verified successfully!`);
+        showPage(8);
+    } else {
+        alert("❌ Verification failed. Please ensure your pasted SMS contains the correct fee amount and recipient details.");
+    }
+}
+
+function showLoanSummary() {
+    const summary = document.getElementById('loanSummary');
+    if (!loggedInUser || !window.selectedLoan || !window.incomeDetails) {
+        summary.innerHTML = '<p style="color:red; font-weight:bold;">Error: Application data missing. Please re-apply.</p>';
+        return;
+    }
+
+    summary.innerHTML = `
+        <p style="font-weight: 700; color: #107a34;">Personal Details</p>
+        <p>Full Name: <strong>${loggedInUser.name}</strong></p>
+        <p>Phone: <strong>${loggedInUser.phone}</strong></p>
+        <p>National ID: <strong>${window.selectedLoan.id}</strong></p>
+        <hr style="margin: 15px 0; border-top: 1px solid #ccc;">
+        <p style="font-weight: 700; color: #107a34;">Financial & Loan Details</p>
+        <p>Loan Type: <strong>${window.selectedLoan.type}</strong></p>
+        <p>Requested Amount: <strong>KES ${window.selectedLoan.amount.toLocaleString()}</strong></p>
+        <p>Commitment Fee Paid: <strong>KES ${window.commitmentFee.toLocaleString()}</strong></p>
+        <p>Occupation: <strong>${window.incomeDetails.occupation}</strong></p>
+        <p>Income: <strong>KES ${window.incomeDetails.amount.toLocaleString()} (${window.incomeDetails.type})</strong></p>
+        <p>Education: <strong>${window.incomeDetails.education}</strong></p>
+    `;
+}
+
+function finalApplicationSubmission() {
+    const repaymentTerm = document.getElementById('repaymentOption').value;
+    
+    // Update the user's local application status
+    if (loggedInUser) {
+        loggedInUser.applicationSubmitted = true;
+        const userIndex = registeredUsers.findIndex(u => u.phone === loggedInUser.phone);
+        if (userIndex > -1) {
+            registeredUsers[userIndex].applicationSubmitted = true;
+            saveUsers();
+        }
+    }
+    
+    // Final mock submission success
+    alert(`✅ Application Submitted! Loan: KES ${window.selectedLoan.amount.toLocaleString()}. Repayment Term: ${repaymentTerm}.`);
+    showPage(10);
+}
+
+
+// --- PROCESSING MODAL (Simulates server latency) ---
+function showProcessingModal() {
+    document.getElementById('processingModal').style.display = 'flex';
+}
+
+function hideProcessingModal() {
+    document.getElementById('processingModal').style.display = 'none';
+}
+
+function simulateProcessingAndNavigate(callback, delay = 1500) {
+    showProcessingModal();
+    setTimeout(() => {
+        hideProcessingModal();
+        callback();
+    }, delay);
+}
+
+// --- INITIALIZE ---
+document.addEventListener('DOMContentLoaded', () => {
+    calculateLoan();
+});
+
+</script>
+</body>
+</html>
